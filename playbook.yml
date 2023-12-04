@@ -3,12 +3,13 @@
 - hosts: all
   become: true
   gather_facts: true
-  pre_tasks:
-    - name: Instalar dsniff
-      ansible.builtin.package:
-        name: dsniff
-        state: present
+  # pre_tasks:
+  #   - name: Instalar dsniff
+  #     ansible.builtin.package:
+  #       name: dsniff
+  #       state: present
   roles:
+  #   - role: apache-php
     - role: exploit
 
 ...

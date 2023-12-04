@@ -1,0 +1,36 @@
+---
+
+servicio: '{% if ansible_os_family == "Debian" %}apache2{% else %}httpd{% endif %}'
+
+
+paquetes: '{% if ansible_os_family == "Debian" %}{{ paquetes_debian }}{% else %}{{ paquetes_redhat }}{% endif %}'
+
+
+paquetes_debian:
+  - apache2
+  - '{% if ansible_distribution == "Debian" %}php8.2{% elif ansible_distribution == "Ubuntu" %}php8.2{% endif %}'
+  - libapache2-mod-php
+  - php-gd
+  - php-mysql
+  - php-curl
+  - php-mbstring
+  - php-intl
+  - php-gmp
+  - php-bcmath
+  - php-xml
+  - php-imagick
+  - php-zip
+
+paquetes_redhat:
+  - httpd
+  - php
+  - php-gd
+  - php-mbstring
+  - php-intl
+  - php-pecl-apcu
+  - php-mysqlnd
+  - php-opcache
+  - php-json
+  - php-zip
+
+...

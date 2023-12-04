@@ -1,0 +1,8 @@
+---
+
+- name: "Reiniciar apache/httpd"
+  ansible.builtin.service:
+    name: "{{ web_service }}"
+    state: restarted
+    
+...
