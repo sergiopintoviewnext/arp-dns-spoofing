@@ -20,7 +20,6 @@
         - yum module enable -y php:remi-8.2
       changed_when: false
 
-
 - name: Block Debian repositorios
   when: ansible_os_family == "Debian" and ansible_distribution == "Debian"
   block:
@@ -40,13 +39,11 @@
         repo: deb https://packages.sury.org/php/ {{ ansible_distribution_release }} main
         state: present
 
-
 - name: Instalar paquetes
   ansible.builtin.package:
     name: "{{ paquetes }}"
     state: present
     update_cache: true
-
 
 - name: Iniciar servicio
   ansible.builtin.service:
