@@ -51,12 +51,11 @@
     state: started
     enabled: true
 
-- name: Rename folder
+- name: Conf DirectoryIndex
   ansible.builtin.lineinfile:
-    path: /etc/httpd/conf/httpd.conf
-    search_string: "    DirectoryIndex index.html"
-    line: "    DirectoryIndex index.html index.php"
-  notify: "Reiniciar apache/httpd"    
+    path: "{{ path_conf_apache }}"
+    line: "DirectoryIndex index.html index.php"
+  notify: Reiniciar apache/httpd
 
 - name: Block habilitar regla firewalld para http si firewalld está instalado y habilitado
   when: ansible_os_family == "RedHat"

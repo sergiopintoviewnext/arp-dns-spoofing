@@ -1,0 +1,43 @@
+---
+
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: ubi8
+    image: registry.access.redhat.com/ubi8/ubi-init:8.8-8 
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/sbin/init"
+    pre_build_image: true
+  - name: ubi9
+    image: registry.access.redhat.com/ubi9/ubi-init:9.2-5 
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/sbin/init"
+    pre_build_image: true
+  - name: debian
+    image: docker.io/debian:stable-20230703
+  - name: ubuntu
+    image: docker.io/ubuntu:jammy-20230624   
+provisioner:
+  name: ansible   
+verifier:
+  name: ansible
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+
+...
